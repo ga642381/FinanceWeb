@@ -21,7 +21,7 @@
 * npm start
 
 4.(terminal 3 : crawler)
-* cd server/Taiwan
+* cd server
 * python stock_daily.py
 
 ## 詳細功能描述
