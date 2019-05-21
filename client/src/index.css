@@ -69,7 +69,117 @@ code {
 /*=====================main===================*/
 .main{
   height:80%;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+  monospace;
+  padding-bottom: 1%;
+  padding-top: 1%;
 }
+
+.white{
+  color: rgba(255, 255, 255, 0.884);
+}
+/*global_market*/
+#global_mkt_ticker{
+  height: 10%;
+  padding-bottom: 0%;
+}
+
+#global_mkt_main_left{
+  height:90%;
+  width: 30%;
+  padding-left:1%;
+  padding-top: 0%;
+  float:left;
+}
+
+#global_mkt_main_right{
+  height:90%;
+  width: 70%;
+  padding-left:1%;
+  padding-top: 0%;
+  float:left;
+}
+
+
+/*===crawler===*/
+.background{
+  width:100%;
+  height:100%;
+
+}
+
+#crawled-title{
+  padding-left :17%;
+  padding-top : 3%;
+}
+
+#crawled-log{
+  padding-left: 22%;
+  padding-right: 48%;
+  height: 75%;
+  width: 100%;
+}
+
+#crawled-footer{
+  color: rgba(255, 255, 255, 0.884);
+  padding-left :22%;
+  padding-right: 48%;
+  text-align: right;
+}
+
+#crawler-main{
+  background-image: url('./assets/mining.gif');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100%;
+}
+/*=== database ===*/
+#stock-intro{
+  width: 50%;
+  float:left;
+}
+
+#querier{
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+  monospace;
+  padding-left: 5%;
+  padding-top: 1%;
+  width: 50%;
+  float:left;
+}
+
+.Database-input-field{
+  float:left;
+  width:70%;
+  height: 100%;
+}
+
+.Database-submit-field{
+  float:left;
+  width:30%;
+  height: 100%;
+}
+
+.Database-date{
+  float:left;
+  width:50%;
+  padding-top: 3%;
+
+}
+
+.Database-date-right{
+  float:left;
+  width:40%;
+  padding-top:3%;
+}
+
+.submit-field{
+  float:left;
+  width:30%;
+  height: 100%;
+  padding-top: 12%;
+}
+
 /*=====================footer===================*/
 .site-footer
 {

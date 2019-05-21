@@ -1,6 +1,6 @@
 
 import React, { Component } from "react";
-import { NavLink, Switch, Route } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 class Footer extends Component {
     constructor(props) {
@@ -11,27 +11,29 @@ class Footer extends Component {
     render() {
         return (
 
-            <footer class="site-footer">
-                <div class="container">
-                    <div class="row">
+            <footer className="site-footer">
+                <div className="container">
+                    <div className="row">
 
-                        <div class="col-md-2">
+                        <div className="col-md-2">
                             <h6>About</h6>
                         </div>
 
-                        <div class="col-md-2">
+                        <div className="col-md-2">
                             <h6>Quick Links</h6>
-                            <ul class="footer-links">
+                            <ul className="footer-links">
                                 <li> <NavLink to="taiwan-stock">台股</NavLink></li>
+                                <li><NavLink to="global-market">全球市場</NavLink></li>
+                                <li><NavLink to="crypto-market">加密貨幣</NavLink></li>
                                 <li ><NavLink to="crawler">爬蟲</NavLink></li>
                                 <li ><NavLink to="database">資料庫</NavLink></li>
                                 <li ><NavLink to="tutorial">新手上路</NavLink></li>
                             </ul>
                         </div>
 
-                        <div class="col-md-3">
+                        <div className="col-md-3">
                             <h6>網站資料來源</h6>
-                            <ul class="footer-links">
+                            <ul className="footer-links">
                                 <li><a href="http://www.twse.com.tw/zh/">台灣證券交易所</a></li>
                                 <li><a href="https://tw.tradingview.com/">TradingView</a></li>
                             </ul>

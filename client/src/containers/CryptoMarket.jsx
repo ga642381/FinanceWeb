@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { Helmet } from "react-helmet";
-import { NavLink, Switch, Route } from 'react-router-dom';
 
-class TaiwanStock extends Component {
+class CryptoMarket extends Component {
     constructor(props) {
         super(props);
         this.state = {}
@@ -33,9 +31,6 @@ class TaiwanStock extends Component {
             <React.Fragment>
                 <div id="crypto_mkt" className="main">
                     <div className="tradingview-widget-container__widget"></div>
-                    <div className="tradingview-widget-copyright"><a href="https://tw.tradingview.com/markets/cryptocurrencies/prices-all/" rel="noopener" target="_blank">
-                        <span className="blue-text">加密貨幣市場</span></a>由TradingView提供</div>
-
 
                 </div>
 
@@ -45,4 +40,4 @@ class TaiwanStock extends Component {
     }
 }
 
-export default TaiwanStock;
+export default CryptoMarket;

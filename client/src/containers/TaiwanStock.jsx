@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { Helmet } from "react-helmet";
-import { NavLink, Switch, Route } from 'react-router-dom';
 
 class TaiwanStock extends Component {
     constructor(props) {

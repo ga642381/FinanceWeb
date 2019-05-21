@@ -65,28 +65,45 @@ class StockDaily():
                         try:
                             raw_data = pd.read_html(url)[0]
                             finished = True
-                        except:
-                            print('try again after 30 seconds...')
-                            time.sleep(30)                            
+                            
+                        except ValueError:
+                            finished = True                 
+                            passed = True
+                            
+                        except Exception as e:
+                            print('try again after 1 minute...error: {}'.format(e))
+                            time.sleep(60)                            
                             
 
-                #=== add to MongoDB ===#
-                df = self._cleanRawData(raw_data, stock_code)
-                Daily_collection = client["TaiwanStock"]["Daily"]
-                Mongo_update_collection(Daily_collection, df)
+                #=== add to MongoDB ===#            
+
                 if passed:
                     print("{} {}  {} Passed...".format(stock_code, self.Code_Name_dict[stock_code], date))
                 elif not passed:
+                    df = self._cleanRawData(raw_data, stock_code)
+                    Daily_collection = client["TaiwanStock"]["Daily"]
+                    Mongo_update_collection(Daily_collection, df)
                     print("{} {}  {} Crawled!".format(stock_code, self.Code_Name_dict[stock_code], date))
                 
                 #=== add to crawled.log ===#
                 with open('crawled.log', 'a') as f:
                     f.write(stamp + "\n")
+                    
+                #== add to website data ===#
+                if not passed:
+                    with open('crawled_website.log', 'a') as f:
+                        # 2330 台積電 2019年 5月
+                        website_log = "{}{} {}年{}月".format(stock_code, 
+                                                     self.Code_Name_dict[stock_code],
+                                                     str(date[:4]),
+                                                     str(date[4:6])
+                                                     )
+                        f.write(website_log + "\n")
                 
                 #=== wait until 5 secs ===#
                 end_time = time.time()
-                while end_time - start_time < 5:
-                    time.sleep(1)
+                while end_time - start_time < 4.5:
+                    time.sleep(0.5)
                     end_time = time.time()
                     
         #=== stock daily to mongo ===#

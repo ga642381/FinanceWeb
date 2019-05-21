@@ -4,12 +4,21 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.3.1",
+    "bootstrap-daterangepicker": "^3.0.5",
     "helmet": "^3.16.0",
+    "jquery": "^3.4.1",
+    "moment": "^2.24.0",
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
+    "react-animated-text": "^0.1.4",
+    "react-bootstrap-daterangepicker": "^4.1.0",
+    "react-datepicker": "^2.5.0",
+    "react-dates": "^20.2.0",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.1",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "3.0.0"
+    "react-scripts": "3.0.0",
+    "react-text-transition": "^0.1.8"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -17,6 +26,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+
   "eslintConfig": {
     "extends": "react-app"
   },

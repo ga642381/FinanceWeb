@@ -1,13 +1,14 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter } from 'react-router-dom';
-import { NavLink, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import Header from "./Header";
-import TaiwanStock from "./TaiwanStock"
-import Crawler from "./Crawler"
 import Footer from "./Footer";
-import CryptoMarket from "./CryptoMarket"
+
+import TaiwanStock from "./TaiwanStock";
+import GlobalMarket from "./GlobalMarket";
+import Crawler from "./Crawler";
+import CryptoMarket from "./CryptoMarket";
+import Database from "./Database";
 
 class FinanceWeb extends Component {
     constructor(props) {
@@ -23,9 +24,12 @@ class FinanceWeb extends Component {
                 {/*there should be "/" and component is in lower case*/}
 
                 <Switch>
+                    <Route path="/" exact component={Crawler} />
                     <Route path="/taiwan-market" component={TaiwanStock} />
-                    <Route path="/crawler" component={Crawler} />
                     <Route path="/crypto-market" component={CryptoMarket} />
+                    <Route path="/global-market" component={GlobalMarket} />
+                    <Route path="/crawler" component={Crawler} />
+                    <Route path="/database" component={Database} />
                 </Switch>
 
                 <Footer />
@@ -33,5 +37,7 @@ class FinanceWeb extends Component {
         );
     }
 }
+
+
 
 export default FinanceWeb;
