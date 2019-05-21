@@ -17,6 +17,7 @@ class Footer extends Component {
 
                         <div className="col-md-2">
                             <h6>About</h6>
+				一個財經資料統整平台，結合網路爬蟲爬，將資料放到MongoDB內供研究使用。
                         </div>
 
                         <div className="col-md-2">
