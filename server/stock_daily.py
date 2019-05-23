@@ -34,6 +34,7 @@ class StockDaily():
         
         fake_headers = {'user-agent': 'Mozilla/5.0 (Macintosh Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36'}
         TWSE_url = "http://www.twse.com.tw/exchangeReport/STOCK_DAY?response=html&date={}&stockNo={}"
+        last_stock_code = ""
         for stock_code in StockCode_list:
             for date in Date_list:
                 start_time = time.time()
@@ -45,8 +46,14 @@ class StockDaily():
                     if (stamp+"\n") in f.readlines():                        
                         stamp_exist = True
                 if stamp_exist:
-                    print("{} has been crawled!".format(stamp))
-                    continue
+                    if (not (str(stock_code) == str(last_stock_code))):
+                        print("{} has been crawled!".format(str(stock_code)))
+                        last_stock_code = stock_code
+                        continue
+                    else:
+                        last_stock_code = stock_code
+                        continue
+
                 
                 
                 #=== handle crawling ===#
@@ -82,7 +89,7 @@ class StockDaily():
                     print("{} {}  {} Passed...".format(stock_code, self.Code_Name_dict[stock_code], date))
                 elif not passed:
                     df = self._cleanRawData(raw_data, stock_code)
-                    Daily_collection = client["TaiwanStock"]["Daily"]
+                    Daily_collection = client["TaiwanStock"]["dailys"]
                     Mongo_update_collection(Daily_collection, df)
                     print("{} {}  {} Crawled!".format(stock_code, self.Code_Name_dict[stock_code], date))
                 
