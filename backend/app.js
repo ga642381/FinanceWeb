@@ -35,7 +35,7 @@ app.use(cookieParser());
 //This middleware serves static assets from your public folder.
 // console.log(path.join(__dirname, 'public'))   .../backend/public :放靜態檔案
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, "client/build")))
+app.use(express.static(path.join(__dirname, "../client/build")))
 
 
 /* ====== DB config ====== */
