@@ -6,6 +6,7 @@ import os
 from stock_code import StockCode
 from MongoDB import Mongo_update_collection
 import pymongo
+import requests
 
 class StockDaily():
     def __init__(self, STOCKCODE):
@@ -31,7 +32,7 @@ class StockDaily():
             with open("crawled.log", "w") as f :
                 f.write(str(self.now))       
         
-        
+        fake_headers = {'user-agent': 'Mozilla/5.0 (Macintosh Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36'}
         TWSE_url = "http://www.twse.com.tw/exchangeReport/STOCK_DAY?response=html&date={}&stockNo={}"
         for stock_code in StockCode_list:
             for date in Date_list:
@@ -53,7 +54,7 @@ class StockDaily():
                 finished = False
                 passed = False
                 try:
-                    raw_data = pd.read_html(url)[0]  
+                    raw_data = pd.read_html(requests.get(url, headers=fake_headers).text)[0]
                     finished = True
                     
                 except ValueError:
@@ -63,7 +64,7 @@ class StockDaily():
                 except:
                     while finished is False:
                         try:
-                            raw_data = pd.read_html(url)[0]
+                            raw_data = pd.read_html(requests.get(url, headers=fake_headers).text)[0]
                             finished = True
                             
                         except ValueError:
