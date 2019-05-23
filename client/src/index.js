@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-
-import { Wave } from "react-animated-text";
 // npm install --save bootstrap 
 // using bootstrap here
 import 'bootstrap/dist/css/bootstrap.css';

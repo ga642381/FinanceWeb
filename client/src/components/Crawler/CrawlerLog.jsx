@@ -9,7 +9,7 @@ class CrawlerLog extends Component {
     }
 
     getCrawledLog() {
-        fetch("http://localhost:9000/crawledlog")
+        fetch("/api/crawledlog")
             .then(res => res.json())
             .then(res => this.setState({ log_list: res }))
             .catch(err => err);
@@ -51,8 +51,8 @@ class CrawlerLog extends Component {
         return (
             <React.Fragment>
                 <div id="crawled-log">
-                    {this.state.log_list.map(e => {
-                        return <h4 className="white">{e}</h4>
+                    {this.state.log_list.map((e, i) => {
+                        return <h4 className="white" key={i}>{e}</h4>
                     })}
                 </div>
 
