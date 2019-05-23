@@ -49,16 +49,12 @@ mongoose.connect(db, { useNewUrlParser: true })
 
 // routes:
 
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
 
 const metasRouter = require('./routes/api/metas')
 const crawledlogRouter = require('./routes/api/crawledlog');
 
 
 //attached to our app
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/api/crawledlog', crawledlogRouter);
 app.use('/api/metas', metasRouter)
 
