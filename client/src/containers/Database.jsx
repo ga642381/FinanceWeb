@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import StockIntro from "../components/Database/StockIntro"
 
-import DatePicker from "react-datepicker";
+//import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { strict } from "assert";
 
 class Database extends Component {
     constructor(props) {
@@ -18,7 +17,7 @@ class Database extends Component {
         event.preventDefault();
 
         const stockNo = this.state.stock_code;
-        fetch('http://localhost:9000/database/' + stockNo)
+        fetch('http://localhost:5000/database/' + stockNo)
             .then(res => res.text())
             .then(res => this.setState({ history_data: res }))
 

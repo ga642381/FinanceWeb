@@ -1,7 +1,4 @@
-const Ticker = document.createElement("script");
-Ticker.src = "https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js";
-Ticker.async = true;
-Ticker.innerHTML = `{
+const TickerHTML = `{
       "symbols": [
         {
           "title": "標準普爾500",
@@ -32,4 +29,4 @@ Ticker.innerHTML = `{
 
     `
 
-export default Ticker
+export default TickerHTML

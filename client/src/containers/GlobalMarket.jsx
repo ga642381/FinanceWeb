@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Ticker from "../components/GlobalMarket/Ticker"
-import MarketOverview from "../components/GlobalMarket/MarketOverview"
-import MarketData from "../components/GlobalMarket/MarketData"
+import TickerHTML from "../components/GlobalMarket/TickerHTML"
+import MarketOverviewHTML from "../components/GlobalMarket/MarketOverviewHTML"
+import MarketDataHTML from "../components/GlobalMarket/MarketDataHTML"
 
 class GlobalMarket extends Component {
   constructor(props) {
@@ -10,6 +10,22 @@ class GlobalMarket extends Component {
   }
 
   componentDidMount() {
+    const MarketOverview = document.createElement("script");
+    MarketOverview.src = "https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js";
+    MarketOverview.async = true;
+    MarketOverview.innerHTML = MarketOverviewHTML;
+
+    const MarketData = document.createElement("script");
+    MarketData.src = "https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js";
+    MarketData.async = true;
+    MarketData.innerHTML = MarketDataHTML;
+
+    const Ticker = document.createElement("script");
+    Ticker.src = "https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js";
+    Ticker.async = true;
+    Ticker.innerHTML = TickerHTML;
+
+
     const global_mkt_main_left = document.getElementById("global_mkt_main_left");
     const global_mkt_main_right = document.getElementById("global_mkt_main_right");
     const global_mkt_ticker = document.getElementById("global_mkt_ticker");

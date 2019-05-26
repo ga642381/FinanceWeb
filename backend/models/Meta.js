@@ -17,7 +17,7 @@ const StockMetaSchema = new Schema({
 // collection name is important 
 // don't know how to use modelname for now
 const collection_name = "metas"
-const Meta = mongoose.model('modelname', StockMetaSchema, this.collection = collection_name)
+const Meta = mongoose.model('modelname', StockMetaSchema, collection_name)
 
 module.exports = Meta
 

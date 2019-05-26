@@ -1,7 +1,4 @@
-const MarketOverview = document.createElement("script");
-MarketOverview.src = "https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js";
-MarketOverview.async = true;
-MarketOverview.innerHTML = `{
+const MarketOverviewHTML = `{
             "showChart": true,
             "locale": "zh_TW",
             "width": "100%",
@@ -133,4 +130,4 @@ MarketOverview.innerHTML = `{
           }
           `
 
-export default MarketOverview
+export default MarketOverviewHTML

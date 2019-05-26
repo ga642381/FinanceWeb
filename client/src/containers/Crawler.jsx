@@ -27,7 +27,7 @@ class Crawler extends Component {
                 <div className="main" id="crawler-main">
                     <div id="crawled-title">
                         <h1 className="white">
-                            <Wave text="Crawling..." />
+                            <Wave text="Last Crawled Data：" />
                         </h1>
                     </div>
 

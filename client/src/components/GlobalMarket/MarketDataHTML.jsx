@@ -1,7 +1,4 @@
-const MarketData = document.createElement("script");
-MarketData.src = "https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js";
-MarketData.async = true;
-MarketData.innerHTML = `
+const MarketDataHTML = `
 {
 "width": "100%",
 "height": "100%",
@@ -124,4 +121,4 @@ MarketData.innerHTML = `
 "locale": "zh_TW"
 }`
 
-export default MarketData
+export default MarketDataHTML

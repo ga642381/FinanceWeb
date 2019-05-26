@@ -13,10 +13,9 @@ class Header extends Component {
             <header id="Header">
                 <div id="Navi-wrapper">
                     <ul className="navi-list">
-                        <li className="navi-item"><NavLink to="crawler">爬蟲</NavLink></li>
+                        <li className="navi-item"><NavLink to="crawler">爬蟲後台</NavLink></li>
                         <li className="navi-item"><NavLink to="global-market">全球市場</NavLink></li>
                         <li className="navi-item"><NavLink to="crypto-market">加密貨幣</NavLink></li>
-
 
                     </ul>
                 </div>

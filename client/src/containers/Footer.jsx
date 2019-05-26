@@ -17,7 +17,7 @@ class Footer extends Component {
 
                         <div className="col-md-2">
                             <h6>About</h6>
-				一個財經資料統整平台，結合網路爬蟲爬，將資料放到MongoDB內供研究使用。
+                            一個財經資料統整平台，結合網路爬蟲，將資料放到MongoDB內供研究使用。
                         </div>
 
                         <div className="col-md-2">
@@ -26,7 +26,7 @@ class Footer extends Component {
                                 <li> <NavLink to="taiwan-stock">台股</NavLink></li>
                                 <li><NavLink to="global-market">全球市場</NavLink></li>
                                 <li><NavLink to="crypto-market">加密貨幣</NavLink></li>
-                                <li ><NavLink to="crawler">爬蟲</NavLink></li>
+                                <li ><NavLink to="crawler">爬蟲後台</NavLink></li>
                                 <li ><NavLink to="database">資料庫</NavLink></li>
                                 <li ><NavLink to="tutorial">新手上路</NavLink></li>
                             </ul>

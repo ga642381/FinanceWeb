@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import fetch from "node-fetch";
+
 class CrawlerLog extends Component {
     constructor(props) {
         super(props);
