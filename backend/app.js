@@ -7,6 +7,7 @@ var cors = require("cors");
 
 
 
+
 /* ====== create a new app ====== */
 //create a new app by calling express()
 const app = express();
@@ -58,22 +59,16 @@ const crawledlogRouter = require('./routes/api/crawledlog');
 app.use('/api/crawledlog', crawledlogRouter);
 app.use('/api/metas', metasRouter)
 
+
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, '../client/build/index.html'), function (err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
+
 /* ====== routes ====== end */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // catch 404 and forward to error handler
