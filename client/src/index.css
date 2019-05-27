@@ -1,3 +1,8 @@
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
 
 html{
   height: 100%;  
@@ -108,23 +113,45 @@ code {
 
 }
 
-#crawled-title{
-  padding-left :17%;
-  padding-top : 3%;
+#crawled-log-container{
+  overflow:hidden;
+  position: relative;
+  margin-left:300px;
+  margin-right: 0;
+  height: 100%;
+  max-width: 560px;  
+  padding-top: 20px;
 }
 
-#crawled-log{
-  padding-left: 22%;
-  padding-right: 48%;
-  height: 75%;
-  width: 100%;
+#crawled-title{
+  margin:0;
+  padding:0;
+  text-align: left;
+  height:10%;
+}
+
+#crawled-log{  
+  text-align: center;
+  margin:0;
+  padding:0;
+  overflow: auto;
+  height:80%;
+}
+
+#crawled-log-list{
+  margin:0;
+  padding:0;
+  list-style-type:none;
+  font-size: 25px;
 }
 
 #crawled-footer{
   color: rgba(255, 255, 255, 0.884);
-  padding-left :22%;
-  padding-right: 48%;
+  margin-left:300px;
+  margin:0;
+  padding-top: 15px;
   text-align: right;
+  height:10%;
 }
 
 #crawler-main{

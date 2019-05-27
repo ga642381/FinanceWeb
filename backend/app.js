@@ -60,6 +60,9 @@ app.use('/api/crawledlog', crawledlogRouter);
 app.use('/api/metas', metasRouter)
 
 
+
+//https://tylermcginnis.com/react-router-cannot-get-url-refresh/
+//fix the problem of refreshing page ( getting the subpage from the client side)
 app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, '../client/build/index.html'), function (err) {
     if (err) {

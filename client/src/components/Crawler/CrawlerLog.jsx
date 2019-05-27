@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import fetch from "node-fetch";
+import { Wave } from "react-animated-text";
 
 class CrawlerLog extends Component {
     constructor(props) {
@@ -52,18 +53,31 @@ class CrawlerLog extends Component {
     render() {
         return (
             <React.Fragment>
-                <div id="crawled-log">
-                    {this.state.log_list.map((e, i) => {
-                        return <h4 className="white" key={i}>{e}</h4>
-                    })}
-                </div>
+                <div id="crawled-log-container">
 
-                <div id="crawled-footer">
-                    <p>
-                        <i>最後更新時間：{this.state.update_time}</i><br />
-                        <i><small>(每 2 秒同步一次)</small></i>
+                    <div id="crawled-title">
+                        <h2 className="white">
+                            <Wave text="Last Crawled Data：" />
+                        </h2>
+                    </div>
 
-                    </p>
+                    <section id="crawled-log">
+
+                        <ul id="crawled-log-list">
+                            {this.state.log_list.map((e, i) => {
+                                return <li className="white" key={i}>{e}</li>
+                            })}
+                        </ul>
+
+                    </section>
+
+                    <section id="crawled-footer">
+                        <p>
+                            <i>最後更新時間：{this.state.update_time}</i><br />
+                            <i><small>(每 2 秒同步一次)</small></i>
+
+                        </p>
+                    </section>
                 </div>
             </React.Fragment >
         );

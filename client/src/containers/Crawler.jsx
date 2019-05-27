@@ -25,14 +25,7 @@ class Crawler extends Component {
         return (
             <React.Fragment>
                 <div className="main" id="crawler-main">
-                    <div id="crawled-title">
-                        <h1 className="white">
-                            <Wave text="Last Crawled Data：" />
-                        </h1>
-                    </div>
-
                     <CrawlerLog />
-
                 </div>
             </React.Fragment >
         );
