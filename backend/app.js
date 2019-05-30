@@ -13,10 +13,11 @@ var cors = require("cors");
 const app = express();
 
 
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+/* ====== view engine setup ====== */
+const expressLayouts = require('express-ejs-layouts')
+app.use(expressLayouts)
+//app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 
 
@@ -49,20 +50,14 @@ mongoose.connect(db, { useNewUrlParser: true })
 /* ====== routes ====== */
 
 // routes:
-
-
 const metasRouter = require('./routes/api/metas')
 const crawledlogRouter = require('./routes/api/crawledlog');
 const authRouter = require('./routes/auth/auth');
-
-
 
 //attached to our app
 app.use('/api/crawledlog', crawledlogRouter);
 app.use('/api/metas', metasRouter)
 app.use('/auth', authRouter)
-
-
 
 //https://tylermcginnis.com/react-router-cannot-get-url-refresh/
 //fix the problem of refreshing page ( getting the subpage from the client side)
@@ -75,6 +70,15 @@ app.get('/*', function (req, res) {
 })
 
 /* ====== routes ====== end */
+
+
+
+
+
+
+
+
+
 
 
 // catch 404 and forward to error handler

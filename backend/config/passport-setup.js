@@ -1,3 +1,5 @@
+//https://cloud.google.com/nodejs/getting-started/authenticate-users
+
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
 
