@@ -2,6 +2,9 @@
 
 ## Github Repo
   https://github.com/ga642381/midterm_FinanceWeb
+  
+## deply網址
+  http://54.238.161.24/
 
 ## project描述 
 一個財經資料的統整平台，並結合網路爬蟲爬取台灣證券交易所資料，將爬取資料放到MongoDB內供研究使用。
