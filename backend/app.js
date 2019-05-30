@@ -53,11 +53,14 @@ mongoose.connect(db, { useNewUrlParser: true })
 
 const metasRouter = require('./routes/api/metas')
 const crawledlogRouter = require('./routes/api/crawledlog');
+const authRouter = require('./routes/auth/auth');
+
 
 
 //attached to our app
 app.use('/api/crawledlog', crawledlogRouter);
 app.use('/api/metas', metasRouter)
+app.use('/auth', authRouter)
 
 
 

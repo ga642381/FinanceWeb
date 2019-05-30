@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Header from "./Header";
 import Footer from "./Footer";
@@ -22,14 +22,18 @@ class FinanceWeb extends Component {
                 <Header />
 
                 {/*there should be "/" and component is in lower case*/}
-
                 <Switch>
                     <Route path="/" exact component={Crawler} />
-                    <Route path="/taiwan-market" component={TaiwanStock} />
-                    <Route path="/crypto-market" component={CryptoMarket} />
-                    <Route path="/global-market" component={GlobalMarket} />
-                    <Route path="/crawler" component={Crawler} />
-                    <Route path="/database" component={Database} />
+                    <Route exact path="/taiwan-market" component={TaiwanStock} />
+                    <Route exact path="/crypto-market" component={CryptoMarket} />
+                    <Route exact path="/global-market" component={GlobalMarket} />
+                    <Route exact path="/crawler" component={Crawler} />
+                    <Route exact path="/database" component={Database} />
+
+
+                    //if components above not rendered, render the component below
+                    //catch ALL
+                    <Route render={() => <Redirect to="/" />} />
                 </Switch>
 
                 <Footer />
