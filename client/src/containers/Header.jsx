@@ -15,10 +15,10 @@ class Header extends Component {
                     <ul className="navi-list">
 
                         <li className="navi-item"><NavLink to="crawler">爬蟲後台</NavLink></li>
-                        <li className="navi-item"><NavLink to="global-market" replace>全球市場</NavLink></li>
+                        <li className="navi-item"><NavLink to="global-market">全球市場</NavLink></li>
                         <li className="navi-item"><NavLink to="crypto-market">加密貨幣</NavLink></li>
-                        <li className="navi-item"><NavLink to="auth/login">登入</NavLink></li>
-                        <li className="navi-item"><NavLink to="auth/register">註冊</NavLink></li>
+                        <li className="navi-item"><a href="/auth/login">登入</a></li>
+                        <li className="navi-item"><a href="/auth/register">註冊</a></li>
 
                     </ul>
                 </div>
