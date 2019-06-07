@@ -5,20 +5,9 @@ const passport = require('passport');
 
 //models
 const User = require('../../models/User');
-
-
-
-//auth welcome
 router.get('/', (req, res) => {
     res.render('welcome')
 })
-
-//auth router 
-router.get('/login', (req, res) => {
-    res.render('login');
-});
-
-
 
 /* ====== register ====== */
 router.get('/register', (req, res) => {
@@ -91,14 +80,6 @@ router.post('/register', (req, res) => {
                             //Save user
                             newUser.save()
                                 .then(user => {
-
-
-
-                                    //auth with google
-                                    // router.get('/google', (req, res) => {
-                                    //     //handle with passport
-                                    //     res.send('logging in with google');
-                                    // });   req.flash('success_msg', 'You are now registered and can log in')
                                     res.redirect('/auth/login');
                                 })
                                 .catch(err => console.log(err))
@@ -112,18 +93,39 @@ router.post('/register', (req, res) => {
 
 
 //Login Handle
+router.get('/login', (req, res) => {
+    res.render('login');
+});
 
+// see https://www.youtube.com/watch?v=hNinO6-bDVM
+// and passport custom callback (passport.authenticate)
 router.post('/login', (req, res, next) => {
-    passport.authenticate('local', {
-        successRedirect: '/',
-        failureRedirect: '/auth/login',
-        failureFlash: true
+
+    passport.authenticate('local', function (err, user, info) {
+
+        if (err) { return next(err); }
+
+        else if (!user) { return res.redirect('/auth/login') }
+
+        else {
+            //req.login --> pass user to passport.serializeUser
+            req.logIn(user, err => {
+                // user will be stored and can be retrive by req["user"]
+                // https://stackoverflow.com/questions/12258795/how-to-access-cookie-set-with-passport-js
+                if (err) { return next(err); }
+                else {
+                    return res.redirect('/');
+                }
+            })
+        }
     })(req, res, next);
+
+
 });
 
 router.get('/logout', (req, res) => {
-    req.logout();
-    req.flash('success_msg', 'You are logged out');
+    req.logOut();
+    req.session.destroy();
     res.redirect('/');
 })
 

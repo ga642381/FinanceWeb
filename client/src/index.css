@@ -51,15 +51,21 @@ code {
   align-items: center;
   height: 100%;
 }
+
 .navi-item {
   margin: 8px 20px;
   display: block;
   border-radius: 10px;
-
 }
 
-
 .navi-item a{
+  text-decoration: none;
+  color: white;           /*color*/
+  padding: 8px 14px;
+  font-size: 25px;
+}
+
+.navi-item span{
   text-decoration: none;
   color: white;           /*color*/
   padding: 8px 14px;

@@ -31,8 +31,8 @@ class FinanceWeb extends Component {
                     <Route exact path="/database" component={Database} />
 
 
-                    //if components above not rendered, render the component below
-                    //catch ALL
+                    {/*if components above not rendered, render the component below
+                    catch ALL*/}
                     <Route render={() => <Redirect to="/" />} />
                 </Switch>
 

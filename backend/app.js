@@ -4,28 +4,29 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-
-
-
-
-
 /* ====== create a new app ====== */
 //create a new app by calling express()
 const app = express();
 
 
+/* ====== DB config ====== */
+const mongoose = require('mongoose');
+const db = require('./config/keys').mongoTaiwanStock;
+mongoose.connect(db, { useNewUrlParser: true })
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.log(err));
+
+
+
 /* ====== view engine setup ====== */
 const expressLayouts = require('express-ejs-layouts')
 app.use(expressLayouts)
-//app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 
 /* ===== cors =====*/
 const cors = require("cors");
 app.use(cors());
-
-
 app.use(logger('dev'));
 
 // POST JSON -> request.body
@@ -43,29 +44,31 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, "../client/build")))
 
 
-/* ===== Express Session =====*/
-const session = require('express-session')
+// // /* ===== Express Session =====*/
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 // Show messages after redirect
 app.use(
   session({
-    secret: 'secret',
+    secret: 'Tn(}2[GlzznYk=!',
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: false,
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
   })
 );
 /* ===== Passport Middleware =====*/
 const passport = require('passport');
 require('./config/passport')(passport);
-
 app.use(passport.initialize());
 app.use(passport.session());
 
-/* ===== Connect flash =====*/
+// /* ===== Connect flash  Flash Middleware=====*/
 const flash = require('connect-flash');
 app.use(flash());
 
-
-//Global Vars
+// VERY IMPORTANT : req.flash() requires sessions.
+// req.flash will create a cookie
+// Global Vars
 app.use(function (req, res, next) {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
@@ -73,28 +76,27 @@ app.use(function (req, res, next) {
   next();
 });
 
-/* ====== DB config ====== */
-const mongoose = require('mongoose');
-const db = require('./config/keys').mongoTaiwanStock;
-mongoose.connect(db, { useNewUrlParser: true })
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.log(err));
+
 
 /* ====== routes ====== */
-
 // routes:
-const metasRouter = require('./routes/api/metas')
+const metasRouter = require('./routes/api/metas');
 const crawledlogRouter = require('./routes/api/crawledlog');
 const authRouter = require('./routes/auth/auth');
+const userdataRouter = require('./routes/api/userdata');
 
 //attached to our app
+
 app.use('/api/crawledlog', crawledlogRouter);
-app.use('/api/metas', metasRouter)
-app.use('/auth', authRouter)
+app.use('/api/metas', metasRouter);
+app.use('/api/userdata', userdataRouter);
+app.use('/auth', authRouter);
+
 
 //https://tylermcginnis.com/react-router-cannot-get-url-refresh/
 //fix the problem of refreshing page ( getting the subpage from the client side)
 app.get('/*', function (req, res) {
+  console.log(req.user);
   res.sendFile(path.join(__dirname, '../client/build/index.html'), function (err) {
     if (err) {
       res.status(500).send(err)
@@ -119,7 +121,7 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  //res.render('error');
+  res.render('error');
 });
 
 module.exports = app;

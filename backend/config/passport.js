@@ -25,7 +25,6 @@ module.exports = function (passport) {
                                 return done(null, user);
                             }
                             else {
-                                console.log("hes");
                                 return done(null, false, { message: 'Password incorrect' })
                             }
                         });
@@ -36,6 +35,7 @@ module.exports = function (passport) {
     );
 
     passport.serializeUser(function (user, done) {
+        console.log(user.name);
         done(null, user.id);
     });
 

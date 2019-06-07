@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Wave } from "react-animated-text";
-import CrawlerLog from "../components/Crawler/CrawlerLog"
-
+import CrawlerLogContent from "../components/Crawler/CrawlerLogContent";
+import CrawlerLogTitle from "../components/Crawler/CrawlerLogTitle";
 
 
 class Crawler extends Component {
@@ -25,7 +24,10 @@ class Crawler extends Component {
         return (
             <React.Fragment>
                 <div className="main" id="crawler-main">
-                    <CrawlerLog />
+                    <div id="crawled-log-container">
+                        <CrawlerLogTitle />
+                        <CrawlerLogContent />
+                    </div>
                 </div>
             </React.Fragment >
         );

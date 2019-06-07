@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import fetch from "node-fetch";
-import { Wave } from "react-animated-text";
 
-class CrawlerLog extends Component {
+class CrawlerLogContent extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -41,7 +41,7 @@ class CrawlerLog extends Component {
                 this.getCrawledLog();
                 const TIME = this.getTime()
                 this.setState({ update_time: TIME })
-            }, 2000
+            }, 200000
         );
     }
 
@@ -49,40 +49,29 @@ class CrawlerLog extends Component {
         clearInterval(this.interval);
     }
 
-
     render() {
         return (
             <React.Fragment>
-                <div id="crawled-log-container">
+                <section id="crawled-log">
 
-                    <div id="crawled-title">
-                        <h2 className="white">
-                            <Wave text="Last Crawled Data：" />
-                        </h2>
-                    </div>
+                    <ul id="crawled-log-list">
+                        {this.state.log_list.map((e, i) => {
+                            return <li className="white" key={i}>{e}</li>
+                        })}
+                    </ul>
 
-                    <section id="crawled-log">
+                </section>
 
-                        <ul id="crawled-log-list">
-                            {this.state.log_list.map((e, i) => {
-                                return <li className="white" key={i}>{e}</li>
-                            })}
-                        </ul>
+                <section id="crawled-footer">
+                    <p>
+                        <i>最後更新時間：{this.state.update_time}</i><br />
+                        <i><small>(每 2 秒同步一次)</small></i>
 
-                    </section>
-
-                    <section id="crawled-footer">
-                        <p>
-                            <i>最後更新時間：{this.state.update_time}</i><br />
-                            <i><small>(每 2 秒同步一次)</small></i>
-
-                        </p>
-                    </section>
-                </div>
+                    </p>
+                </section>
             </React.Fragment >
         );
-
     }
 }
 
-export default CrawlerLog;
+export default CrawlerLogContent;
