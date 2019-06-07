@@ -1,9 +1,10 @@
-var createError = require('http-errors');
+const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var cors = require("cors");
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+
+
 
 
 
@@ -20,25 +21,57 @@ app.use(expressLayouts)
 app.set('view engine', 'ejs');
 
 
-
+/* ===== cors =====*/
+const cors = require("cors");
 app.use(cors());
+
+
 app.use(logger('dev'));
 
-// Express now includes body-parser middleware by default
 // POST JSON -> request.body
-app.use(express.json());     //app.use(bodyParser.json());
 
 //query string data in the URL(e.g. /profile?id=5) -> request.query
-app.use(express.urlencoded({ extended: false }));     //app.use(bodyParser.urlencoded({ extended: false }));
 
 //client -> request.cookies ; allow modification : by changing response.cookies
-app.use(cookieParser());
 
-//This middleware serves static assets from your public folder.
-// console.log(path.join(__dirname, 'public'))   .../backend/public :放靜態檔案
+// This middleware serves static assets from your public folder.
+// .../backend/public :放靜態檔案
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, "../client/build")))
 
+
+/* ===== Express Session =====*/
+const session = require('express-session')
+// Show messages after redirect
+app.use(
+  session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+  })
+);
+/* ===== Passport Middleware =====*/
+const passport = require('passport');
+require('./config/passport')(passport);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+/* ===== Connect flash =====*/
+const flash = require('connect-flash');
+app.use(flash());
+
+
+//Global Vars
+app.use(function (req, res, next) {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  next();
+});
 
 /* ====== DB config ====== */
 const mongoose = require('mongoose');
@@ -73,14 +106,6 @@ app.get('/*', function (req, res) {
 
 
 
-
-
-
-
-
-
-
-
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
@@ -94,7 +119,7 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  //res.render('error');
 });
 
 module.exports = app;

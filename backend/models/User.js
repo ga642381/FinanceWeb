@@ -17,10 +17,11 @@ const UserSchema = new mongoose.Schema({
     },
 
     date: {
-        type: String,
+        type: Date,
         default: Date.now
     }
 });
-const collection_name = "users"
+
+const collection_name = "users";
 const User = mongoose.model('User', UserSchema, collection_name);
 module.exports = User;

@@ -13,20 +13,12 @@ class Header extends Component {
             <header id="Header">
                 <div id="Navi-wrapper">
                     <ul className="navi-list">
-                        {/*
-                        <li className="navi-item"><a href="/crawler">爬蟲後台</a></li>
-                        <li className="navi-item"><a href="/global-market" replace>全球市場</a></li>
-                        <li className="navi-item"><a href="/crypto-market">加密貨幣</a></li>
-
-                        <li className="navi-item"><a href="/login">登入</a></li>
-                        <li className="navi-item"><a href="/signin">註冊</a></li>
-                        */}
 
                         <li className="navi-item"><NavLink to="crawler">爬蟲後台</NavLink></li>
                         <li className="navi-item"><NavLink to="global-market" replace>全球市場</NavLink></li>
                         <li className="navi-item"><NavLink to="crypto-market">加密貨幣</NavLink></li>
-                        <li className="navi-item"><NavLink to="login">登入</NavLink></li>
-                        <li className="navi-item"><NavLink to="signin">註冊</NavLink></li>
+                        <li className="navi-item"><NavLink to="auth/login">登入</NavLink></li>
+                        <li className="navi-item"><NavLink to="auth/register">註冊</NavLink></li>
 
                     </ul>
                 </div>
