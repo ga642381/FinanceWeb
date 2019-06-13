@@ -19,7 +19,6 @@
     "express-ejs-layouts": "^2.5.0",
     "express-session": "^1.16.1",
     "http-errors": "~1.6.2",
-    "jade": "~1.11.0",
     "mongodb": "^3.2.5",
     "mongoose": "^5.5.10",
     "morgan": "^1.9.1",
