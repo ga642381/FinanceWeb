@@ -13,8 +13,8 @@ const app = express();
 const mongoose = require('mongoose');
 const db = require('./config/keys').mongoTaiwanStock;
 mongoose.connect(db, { useNewUrlParser: true })
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.log(err));
+    .then(() => console.log('MongoDB connected'))
+    .catch(err => console.log(err));
 
 
 
@@ -49,12 +49,12 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 // Show messages after redirect
 app.use(
-  session({
-    secret: 'Tn(}2[GlzznYk=!',
-    resave: true,
-    saveUninitialized: false,
-    store: new MongoStore({ mongooseConnection: mongoose.connection })
-  })
+    session({
+        secret: 'Tn(}2[GlzznYk=!',
+        resave: true,
+        saveUninitialized: false,
+        store: new MongoStore({ mongooseConnection: mongoose.connection })
+    })
 );
 /* ===== Passport Middleware =====*/
 const passport = require('passport');
@@ -70,15 +70,21 @@ app.use(flash());
 // req.flash will create a cookie
 // Global Vars
 app.use(function (req, res, next) {
-  res.locals.success_msg = req.flash('success_msg');
-  res.locals.error_msg = req.flash('error_msg');
-  res.locals.error = req.flash('error');
-  next();
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
+    next();
 });
 
-
-
 /* ====== routes ====== */
+/* Google auth */
+app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/' }),
+    (req, res) => {
+        console.log('console in cb: ', req.user);
+        res.redirect('/');
+    });
+
 // routes:
 const metasRouter = require('./routes/api/metas');
 const crawledlogRouter = require('./routes/api/crawledlog');
@@ -86,7 +92,6 @@ const authRouter = require('./routes/auth/auth');
 const userdataRouter = require('./routes/api/userdata');
 
 //attached to our app
-
 app.use('/api/crawledlog', crawledlogRouter);
 app.use('/api/metas', metasRouter);
 app.use('/api/userdata', userdataRouter);
@@ -96,32 +101,29 @@ app.use('/auth', authRouter);
 //https://tylermcginnis.com/react-router-cannot-get-url-refresh/
 //fix the problem of refreshing page ( getting the subpage from the client side)
 app.get('/*', function (req, res) {
-  console.log(req.user);
-  res.sendFile(path.join(__dirname, '../client/build/index.html'), function (err) {
-    if (err) {
-      res.status(500).send(err)
-    }
-  })
+    console.log(req.user);
+    res.sendFile(path.join(__dirname, '../client/build/index.html'), function (err) {
+        if (err) {
+            res.status(500).send(err)
+        }
+    })
 })
 
 /* ====== routes ====== end */
-
-
-
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  next(createError(404));
+    next(createError(404));
 });
 
 // error handler
 app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
 });
 
 module.exports = app;
