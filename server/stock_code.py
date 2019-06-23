@@ -27,9 +27,9 @@ class StockCode():
         return dict(zip(code, name))
     
     def toMongo(self):
-        mongo_url = "mongodb+srv://ga642381:abc@taiwanstock-2i5kf.gcp.mongodb.net/test?retryWrites=true"
+        mongo_url = "mongodb+srv://finance:7N8zO4BzWO0hCEcF@cluster0-uvsdu.gcp.mongodb.net/test?retryWrites=true&w=majority"
         client = pymongo.MongoClient(mongo_url)
-        Code_collection = client["TaiwanStock"]["Code"]
+        Code_collection = client["TaiwanStock"]["stocks"]
         Mongo_update_collection(Code_collection, self.stockCodeDataFrame)
         print("Sucessfully update(insert) data !")
     
