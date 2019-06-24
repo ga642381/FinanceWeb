@@ -41,7 +41,7 @@ class CrawlerLogContent extends Component {
                 this.getCrawledLog();
                 const TIME = this.getTime()
                 this.setState({ update_time: TIME })
-            }, 200000
+            }, 2000
         );
     }
 

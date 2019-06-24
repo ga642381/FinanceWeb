@@ -4,35 +4,39 @@
             <h1 class="text-center mb-3">
                 <i class="fas fa-user-plus"></i> Register
             </h1>
-
+            <!--
+                <div class="text-center">
+                    <img src="../logo/logo.png"/>
+                </div>
+            -->
             <% include ./partials/messages %>
             <form action="/auth/register" method="POST">
                 <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="name" id="name" name="name" class="form-control" placeholder="Enter Name"
+                    <label for="name">使用者名稱：</label>
+                    <input type="name" id="name" name="name" class="form-control"
                         value="<%= typeof name != 'undefined' ? name : '' %>" />
                 </div>
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email"
+                    <label for="email">郵箱：</label>
+                    <input type="email" id="email" name="email" class="form-control"
                         value="<%= typeof email != 'undefined' ? email : '' %>" />
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password">密碼：</label>
                     <input type="password" id="password" name="password" class="form-control"
-                        placeholder="Create Password" value="<%= typeof password != 'undefined' ? password : '' %>" />
+                        value="<%= typeof password != 'undefined' ? password : '' %>" />
                 </div>
                 <div class="form-group">
-                    <label for="password2">Confirm Password</label>
-                    <input type="password" id="password2" name="password2" class="form-control"
-                        placeholder="Confirm Password"
+                    <label for="password2">確認密碼：</label>
+                    <input type="password" id="password2" name="password2" class="form-control"                        
                         value="<%= typeof password2 != 'undefined' ? password2 : '' %>" />
                 </div>
-                <button type="submit" class="btn btn-primary btn-block">
-                    Register
+                <button type="submit" class="btn btn-lg btn-primary btn-block">
+                    註冊
                 </button>
             </form>
-            <p class="lead mt-4">Have An Account? <a href="/auth/login">Login</a></p>
+            <hr class="my-4">
+            <p class="lead text-right">已經註冊? <a href="/auth/login" style="text-decoration:underline"> 登入 </a></p>
         </div>
     </div>
 </div>

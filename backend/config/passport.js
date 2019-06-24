@@ -40,9 +40,9 @@ module.exports = function (passport) {
         clientID: keys.Google.clientID,
         clientSecret: keys.Google.clientSecret,
         callbackURL: "/auth/google/callback"
-    }, async(accessToken, refreshToken, profile, done) => {
+    }, async (accessToken, refreshToken, profile, done) => {
         const currentUser = await User.findOne({ name: profile.displayName });
-        console.log('Current User in google strategy: ', currentUser);
+        //console.log('Current User in google strategy: ', currentUser);
         if (!currentUser) {
             const newUser = new User({
                 name: profile._json.name,
@@ -58,7 +58,6 @@ module.exports = function (passport) {
 
     /* serialize setting for cookie */
     passport.serializeUser(function (user, done) {
-        console.log(user.name);
         done(null, user.id);
     });
 
@@ -67,11 +66,4 @@ module.exports = function (passport) {
             done(null, user);
         })
     })
-
-    // passport.deserializeUser(function (id, done) {
-    //     User.findById(id, function (err, user) {
-    //         done(err, user);
-    //     });
-    // });
-
 }

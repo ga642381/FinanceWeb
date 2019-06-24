@@ -137,22 +137,21 @@ class MarketDailyCrawler():
                 if not passed:
                     if not force:
                         with open('crawled_website.log', 'a') as f:
-                            # 2330 台積電 2019年 5月
-                            website_log = "{}{} {}年{}月".format(stock_code, 
-                                                         Code_Name_dict[stock_code],
-                                                         str(date[:4]),
-                                                         str(date[4:6])
-                                                         )
+                            
+                            log_name = "{}{}".format(stock_code, Code_Name_dict[stock_code])
+                            log_date = "{}年{}月".format(str(date[:4]), str(date[4:6]))
+                            
+                            website_log = "{}  {}".format(log_name, log_date)                            
                             f.write(website_log + "\n")
                     elif force:
                         with open('crawled_website.log', 'a') as f:
-                            # 2330 台積電 2019年 5月
-                            website_log = "{}{} {}年{}月{}日".format(stock_code, 
-                                                         Code_Name_dict[stock_code],
-                                                         str(date[:4]),
-                                                         str(date[4:6]),
-                                                         str(self.now_day)
-                                                         )
+                            log_name = "{}{}".format(stock_code, Code_Name_dict[stock_code])
+                            log_date = "{}年{}月{}日".format(str(date[:4]),
+                                                            str(date[4:6]),
+                                                            str(self.now_day)
+                                                            )  
+                            
+                            website_log = "{}  {}".format(log_name, log_date)                            
                             f.write(website_log + "\n")
                 
                 #=== wait until 5 secs ===#

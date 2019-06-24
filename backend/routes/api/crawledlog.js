@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const readLastLines = require('read-last-lines');
 
-const path_to_log_file = "../server/crawled_website.log";
+const path_to_log_file = "../ServerScripts/crawled_website.log";
 
 
 function handleReadLog(data) {

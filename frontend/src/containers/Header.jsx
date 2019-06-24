@@ -57,7 +57,7 @@ class Header extends Component {
                         </ul>
 
                         <ul className="navbar-nav ml-auto">
-                            <li className="navi-item"><span>{`Welocme: ${this.state.user_name}`}</span></li>
+                            <li className="navi-item"><span>{`Welcome: ${this.state.user_name}`}</span></li>
                             <li className="navi-item"><a href="/auth/logout">登出</a></li>
 
                         </ul>

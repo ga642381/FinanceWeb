@@ -41,18 +41,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, "../client/build")))
+app.use(express.static(path.join(__dirname, "../frontend/build")))
 
-
-// // /* ===== Express Session =====*/
+/* ===== Express Session =====*/
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
-// Show messages after redirect
 app.use(
     session({
         secret: 'Tn(}2[GlzznYk=!',
         resave: true,
         saveUninitialized: false,
+        cookie: { maxAge: 24 * 60 * 1000 },
         store: new MongoStore({ mongooseConnection: mongoose.connection })
     })
 );
@@ -81,7 +80,7 @@ app.use(function (req, res, next) {
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/' }),
     (req, res) => {
-        console.log('console in cb: ', req.user);
+        //console.log('console in cb: ', req.user);
         res.redirect('/');
     });
 
@@ -101,8 +100,8 @@ app.use('/auth', authRouter);
 //https://tylermcginnis.com/react-router-cannot-get-url-refresh/
 //fix the problem of refreshing page ( getting the subpage from the client side)
 app.get('/*', function (req, res) {
-    console.log(req.user);
-    res.sendFile(path.join(__dirname, '../client/build/index.html'), function (err) {
+    //console.log(req.user);
+    res.sendFile(path.join(__dirname, '../frontend/build/index.html'), function (err) {
         if (err) {
             res.status(500).send(err)
         }

@@ -39,6 +39,7 @@ class Footer extends Component {
                                 <li><a href="https://tw.tradingview.com/">TradingView</a></li>
                             </ul>
                         </div>
+                        <div>Logo made with <a href="/en/" title="Free Online Logo Maker">DesignEvo</a></div>
                     </div>
                 </div>
             </footer>

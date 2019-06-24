@@ -13,13 +13,4 @@ router.get('/', (req, res) => {
         .then(metas => res.json(metas));
 })
 
-
-// router.post('/', (req, res) => {
-//     const newMeta = new Meta({
-//         名稱: "中華民國"
-//     });
-
-//     newMeta.save().then(meta => res.json(meta))
-// })
-
 module.exports = router;

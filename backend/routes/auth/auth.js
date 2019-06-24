@@ -110,7 +110,7 @@ router.post('/login', (req, res, next) => {
         else {
             //req.login --> pass user to passport.serializeUser
             req.logIn(user, err => {
-                // user will be stored and can be retrive by req["user"]
+                // user will be stored and can be retrived by req["user"]
                 // https://stackoverflow.com/questions/12258795/how-to-access-cookie-set-with-passport-js
                 if (err) { return next(err); }
                 else {
