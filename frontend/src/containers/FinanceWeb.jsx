@@ -4,11 +4,11 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Header from "./Header";
 import Footer from "./Footer";
 
-import TaiwanStock from "./TaiwanStock";
-import GlobalMarket from "./GlobalMarket";
-import Crawler from "./Crawler";
-import CryptoMarket from "./CryptoMarket";
-import Database from "./Database";
+import TaiwanStock from "./pages/TaiwanStock";
+import GlobalMarket from "./pages/GlobalMarket";
+import Crawler from "./pages/Crawler";
+import CryptoMarket from "./pages/CryptoMarket";
+import Database from "./pages/Database";
 
 class FinanceWeb extends Component {
     constructor(props) {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import CrawlerLogContent from "../components/Crawler/CrawlerLogContent";
-import CrawlerLogTitle from "../components/Crawler/CrawlerLogTitle";
+import CrawlerLogContent from "../../components/Crawler/CrawlerLogContent";
+import CrawlerLogTitle from "../../components/Crawler/CrawlerLogTitle";
 
 
 class Crawler extends Component {

@@ -1,8 +1,8 @@
 import json
 import pymongo
 
-mongo_url = "mongodb+srv://finance:finance@cluster0-uvsdu.gcp.mongodb.net/test?retryWrites=true&w=majority"
-
+#test
+mongo_url = "mongodb+srv://Finance_python:Finance_python@cluster0-uvsdu.gcp.mongodb.net/test?retryWrites=true&w=majority"
 client = pymongo.MongoClient(mongo_url)
 
 def df2json(df):
@@ -12,7 +12,7 @@ def df2json(df):
 def Mongo_show_database_names(client):
     print(client.list_database_names())
 
-#
+
 def Mongo_get_code_data(client):
     Code_mongo = client["TaiwanStock"]["stocks"]
     docs = []
@@ -27,4 +27,16 @@ def Mongo_update_collection(collection, dataframe):
     input_data = df2json(dataframe)
     for doc in input_data:
         collection.update_one(doc, {'$set' : doc}, upsert=True)
+        
+
+def Mongo_get_TAIEX_data(client):
+    # TODO : add option : time
+    TAIEX_mongo = client["TaiwanStock"]["TAIEX_dailys"]
+    docs = []
+    for doc in TAIEX_mongo.find():
+        docs.append(doc)
+    return docs
+    
+    
+    
 

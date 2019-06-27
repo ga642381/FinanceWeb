@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import TickerHTML from "../components/GlobalMarket/TickerHTML"
-import MarketOverviewHTML from "../components/GlobalMarket/MarketOverviewHTML"
-import MarketDataHTML from "../components/GlobalMarket/MarketDataHTML"
+import TickerHTML from "../../components/GlobalMarket/TickerHTML"
+import MarketOverviewHTML from "../../components/GlobalMarket/MarketOverviewHTML"
+import MarketDataHTML from "../../components/GlobalMarket/MarketDataHTML"
 
 class GlobalMarket extends Component {
   constructor(props) {
