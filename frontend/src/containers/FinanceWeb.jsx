@@ -9,6 +9,7 @@ import GlobalMarket from "./pages/GlobalMarket";
 import Crawler from "./pages/Crawler";
 import CryptoMarket from "./pages/CryptoMarket";
 import Database from "./pages/Database";
+import Main from "./pages/Main";
 
 class FinanceWeb extends Component {
     constructor(props) {
@@ -23,11 +24,11 @@ class FinanceWeb extends Component {
 
                 {/*there should be "/" and component is in lower case*/}
                 <Switch>
-                    <Route path="/" exact component={Crawler} />
+                    <Route path="/" exact component={Main} />
                     <Route exact path="/taiwan-market" component={TaiwanStock} />
-                    <Route exact path="/crypto-market" component={CryptoMarket} />
-                    <Route exact path="/global-market" component={GlobalMarket} />
                     <Route exact path="/crawler" component={Crawler} />
+                    <Route exact path="/crypto-market" component={CryptoMarket} />
+                    <Route exact path="/global-market" component={GlobalMarket} />                    
                     <Route exact path="/database" component={Database} />
 
 

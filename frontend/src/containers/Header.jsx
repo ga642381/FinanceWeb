@@ -32,6 +32,7 @@ class Header extends Component {
                 <header id="Header">
                     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                         <ul className="navbar-nav">
+                            <li className="navi-item"><NavLink to="main">首頁</NavLink></li>
                             <li className="navi-item"><NavLink to="crawler">爬蟲後台</NavLink></li>
                             <li className="navi-item"><NavLink to="taiwan-market">台灣股市</NavLink></li>
                             <li className="navi-item"><NavLink to="global-market">全球市場</NavLink></li>
@@ -53,6 +54,7 @@ class Header extends Component {
                 <header id="Header">
                     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                         <ul className="navbar-nav">
+                            <li className="navi-item"><NavLink to="main">首頁</NavLink></li>
                             <li className="navi-item"><NavLink to="crawler">爬蟲後台</NavLink></li>
                             <li className="navi-item"><NavLink to="taiwan-market">台灣股市</NavLink></li>
                             <li className="navi-item"><NavLink to="global-market">全球市場</NavLink></li>
