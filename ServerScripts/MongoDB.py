@@ -12,16 +12,30 @@ def df2json(df):
 def Mongo_show_database_names(client):
     print(client.list_database_names())
 
-
+'''
 def Mongo_get_code_data(client):
     Code_mongo = client["TaiwanStock"]["stocks"]
     docs = []
     for doc in Code_mongo.find():
         docs.append(doc)
     return docs
+'''
 
 def Mongo_del_collection(collection):
     collection.drop()
+    
+    
+def Mongo_get_collection_all(collection):
+    docs = []
+    for doc in collection.find():
+        docs.append(doc)
+    return docs   
+    
+# two functions below should be merged 
+def Mongo_update_collec(collection, input_data):
+    for doc in input_data:
+        collection.update_one(doc, {'$set' : doc}, upsert=True)          
+    
     
 def Mongo_update_collection(collection, dataframe):
     input_data = df2json(dataframe)

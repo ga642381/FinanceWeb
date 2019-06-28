@@ -4,7 +4,7 @@ import time
 import datetime
 import argparse
 from stock_code import StockCode
-from MongoDB import Mongo_update_collection
+from MongoDB import Mongo_update_collection, Mongo_get_collection_all, Mongo_update_collec
 import pymongo
 import requests
 
@@ -27,11 +27,20 @@ class MarketDailyCrawler():
         
         self.STOCKCODE = STOCKCODE # a class from the outside
         
+        
+
+
         #=== pre work ===#
         self.createLogFile()        
         self.mongo_url = "mongodb+srv://Finance_python:Finance_python@cluster0-uvsdu.gcp.mongodb.net/test?retryWrites=true&w=majority"
         self.client = pymongo.MongoClient(self.mongo_url)
         time.sleep(5) 
+        
+        #=== get crawled logs ===# 
+        #  !! : this might cost a lot of memory in the future        
+        collection = self.client["TaiwanStock"]["crawled_logs"]
+        logs = Mongo_get_collection_all(collection)
+        self.crawled_logs = [doc['stamp'] for doc in logs]
         
     def createLogFile(self):
         with open("crawled.log", "a") as f :
@@ -80,10 +89,10 @@ class MarketDailyCrawler():
                 stamp = str(stock_code) + "_" + str(date)
                 
                 if not force:                    
-                    stamp_exist = False
-                    with open("crawled.log", "r") as f:
-                        if (stamp+"\n") in f.readlines():                        
-                            stamp_exist = True
+                    stamp_exist = False      
+                    
+                    if stamp in self.crawled_logs:
+                        stamp_exist = True      
                             
                     if stamp_exist:
                         if (not (str(stock_code) == str(last_stock_code))):
@@ -130,9 +139,13 @@ class MarketDailyCrawler():
                     print("{} {}  {} Crawled!".format(stock_code, Code_Name_dict[stock_code], date))
                 
                 #=== add to crawled.log ===#
+                collection = self.client["TaiwanStock"]["crawled_logs"]
+                Mongo_update_collec(collection, [{"stamp" : stamp}])
+                
+                
                 with open('crawled.log', 'a') as f:
                     f.write(stamp + "\n")
-                    
+                
                 #== add to website data ===#
                 if not passed:
                     if not force:
@@ -156,7 +169,7 @@ class MarketDailyCrawler():
                 
                 #=== wait until 5 secs ===#
                 end_time = time.time()
-                while end_time - start_time < 4.5:
+                while end_time - start_time < 6.5:
                     time.sleep(0.5)
                     end_time = time.time()        
        
