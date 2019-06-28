@@ -89,41 +89,16 @@ const metasRouter = require('./routes/api/metas');
 const crawledlogRouter = require('./routes/api/crawledlog');
 const authRouter = require('./routes/auth/auth');
 const userdataRouter = require('./routes/api/userdata');
+const databaseRouter = require('./routes/api/database');
 
 //attached to our app
+app.use('/api/database', databaseRouter);
 app.use('/api/crawledlog', crawledlogRouter);
 app.use('/api/metas', metasRouter);
 app.use('/api/userdata', userdataRouter);
 app.use('/auth', authRouter);
 
-const StockDaily = require('./models/StockDaily');
-app.get('/database', async(req, res) => {
-    const stock_by_Code = await StockDaily.find({ Code: req.query.stock });
-    if (stock_by_Code.length !== 0) {
-        console.log('stock_by_Code', stock_by_Code);
-        Sort_by_Date(stock_by_Code);
-        return res.send(stock_by_Code);
-    }
 
-    const stock_by_Name = await StockDaily.find({ Name: req.params.stock });
-    if (stock_by_Name.length !== 0) {
-        console.log('stock_by_Name', stock_by_Name)
-        Sort_by_Date(stock_by_Name)
-        return  res.send(stock_by_Name)
-    }
-    
-    res.send('not found');
-});
-
-/* helper functions */
-function Sort_by_Date(allData) {
-    allData.sort(function(a,b) {
-        a = a.Date.split('/').join('');
-        b = b.Date.split('/').join('');
-        return a > b ? 1 : a < b ? -1 : 0;
-        // return a.localeCompare(b);         // <-- alternative 
-    })
-}
 
 
 //https://tylermcginnis.com/react-router-cannot-get-url-refresh/

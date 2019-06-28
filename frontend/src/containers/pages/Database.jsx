@@ -10,32 +10,22 @@ class Database extends Component {
         allData: []
     }
 
-    componentWillMount = () => {
-        const stock = document.URL.substring(document.URL.search('database') + 9);
-        if (stock) {
-            axios.get('/database', {
-                params: {
-                    stock
-                }
-            })
-                .then(res => {
-                    this.setState({ allData: res.data })
-                })
-                .catch(error => console.log(error))
-            // axios.post('/database', { stock })
-            //     .then(res => {
-            //         if (res.data === 'not found') {
-            //             return alert('no such stock')
-            //         }
-
-            //         this.setState({ allData: res.data })
-            //     })
-            //     .catch(error => console.log(error))
-        }
-    }
 
     handleSubmit = () => {
-        window.location = '/database/' + this.state.stock
+        const stock = this.state.stock;
+        if (stock) {
+            axios.get('/api/database', {
+                params: {
+                    stock: stock
+                }
+            })
+
+                .then(res => {
+                    this.setState({ allData: res.data })
+                    console.log(this.state.allData)
+                })
+                .catch(error => console.log(error))
+        }
     }
 
     handleChange = e => {
@@ -66,13 +56,9 @@ class Database extends Component {
             <React.Fragment>
                 <div id="database" className="main">
                     <div id="querier">
-                        <div>
-                            <div>
-                                <label><b>股票代號</b></label><br />
-                                <input type="text" name="stock" placeholder="輸入股票代碼 or 公司名稱" value={this.state.stock} onChange={this.handleChange} /><br />
-                                <input type="submit" value="送出" onClick={this.handleSubmit} />
-                            </div>
-                        </div>
+                        <label><b>股票代號</b></label><br />
+                        <input type="text" name="stock" placeholder="輸入股票代碼 or 公司名稱" value={this.state.stock} onChange={this.handleChange} /><br />
+                        <input type="submit" value="送出" onClick={this.handleSubmit} />
                     </div>
 
                     <div id="database-stockInfo">

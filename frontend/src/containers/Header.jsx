@@ -37,7 +37,7 @@ class Header extends Component {
                             <li className="navi-item"><NavLink to="taiwan-market">台灣股市</NavLink></li>
                             <li className="navi-item"><NavLink to="global-market">全球市場</NavLink></li>
                             <li className="navi-item"><NavLink to="crypto-market">加密貨幣</NavLink></li>
-                            
+                            <li className="navi-item"><NavLink to="database">資料庫</NavLink></li>
                         </ul>
 
                         <ul className="navbar-nav ml-auto">
@@ -59,6 +59,7 @@ class Header extends Component {
                             <li className="navi-item"><NavLink to="taiwan-market">台灣股市</NavLink></li>
                             <li className="navi-item"><NavLink to="global-market">全球市場</NavLink></li>
                             <li className="navi-item"><NavLink to="crypto-market">加密貨幣</NavLink></li>
+                            <li className="navi-item"><NavLink to="database">資料庫</NavLink></li>
                         </ul>
 
                         <ul className="navbar-nav ml-auto">

@@ -29,7 +29,7 @@ class FinanceWeb extends Component {
                     <Route exact path="/crawler" component={Crawler} />
                     <Route exact path="/crypto-market" component={CryptoMarket} />
                     <Route exact path="/global-market" component={GlobalMarket} />                    
-                    <Route exact path="/database" component={Database} />
+                    <Route path="/database" component={Database} />
 
 
                     {/*if components above not rendered, render the component below
