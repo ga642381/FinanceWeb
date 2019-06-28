@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from 'axios';
 import { Table } from 'reactstrap';
 //import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -6,37 +7,35 @@ import "react-datepicker/dist/react-datepicker.css";
 class Database extends Component {
     state = {
         stock: '',
-        allData: [{
-            Change: 2.5,
-            ClosingPrice: 238,
-            Code: "2330",
-            Date: "108/06/03",
-            HighestPrice: 238.5,
-            LowestPrice: 232,
-            Name: "台積電",
-            OpeningPrice: 235.5,
-            TradeValue: 8651389851,
-            TradeVolume: 36687092,
-            Transaction: 8857
-        }]
+        allData: []
     }
 
-    handleSubmit = e => {
-        e.preventDefault();
-        // axios.post('/database', { stock: this.state.stock })
-        //     .then(res => {
-        //         if (res.data === 'not found')
-        //             return this.setState({ allData: [] });
-
-        //         console.log('response  ', res.data)
-        //         this.setState({ allData: res.data });
-        //     })
-        //     .catch(error => console.log(error));
-        fetch('/database/' + this.state.stock)
-            .then(res => {
-
+    componentWillMount = () => {
+        const stock = document.URL.substring(document.URL.search('database') + 9);
+        if (stock) {
+            axios.get('/database', {
+                params: {
+                    stock
+                }
             })
-            .catch(error => console.log(error))
+                .then(res => {
+                    this.setState({ allData: res.data })
+                })
+                .catch(error => console.log(error))
+            // axios.post('/database', { stock })
+            //     .then(res => {
+            //         if (res.data === 'not found') {
+            //             return alert('no such stock')
+            //         }
+
+            //         this.setState({ allData: res.data })
+            //     })
+            //     .catch(error => console.log(error))
+        }
+    }
+
+    handleSubmit = () => {
+        window.location = '/database/' + this.state.stock
     }
 
     handleChange = e => {
@@ -47,7 +46,7 @@ class Database extends Component {
     render() {
         const tableStyle = this.state.allData.length ? {} : { display: 'none' };
         const stockInfo = this.state.allData.map(e => {
-            return(
+            return (
                 <tr>
                     <td> {e.Change} </td>
                     <td> {e.ClosingPrice} </td>
@@ -66,34 +65,37 @@ class Database extends Component {
         return (
             <React.Fragment>
                 <div id="database" className="main">
-                    <Table style={tableStyle}>
-                        <thead>
-                            <tr>
-                                <th> Change </th>
-                                <th> ClosingPrice </th>
-                                <th> Code </th>
-                                <th> Date </th>
-                                <th> HighestPrice </th>
-                                <th> LowestPrice </th>
-                                <th> Name </th>
-                                <th> OpeningPrice </th>
-                                <th> TradeValue </th>
-                                <th> TradeVolume </th>
-                                <th> Transaction </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {stockInfo}
-                        </tbody>
-                    </Table>
                     <div id="querier">
-                        <form action='search'>
+                        <div>
                             <div>
                                 <label><b>股票代號</b></label><br />
-                                <input type="text" name="stockNo" placeholder="輸入股票代碼 or 公司名稱" value={this.state.stock} onChange={this.handleChange} /><br />
-                                <input type="submit" value="送出" />
+                                <input type="text" name="stock" placeholder="輸入股票代碼 or 公司名稱" value={this.state.stock} onChange={this.handleChange} /><br />
+                                <input type="submit" value="送出" onClick={this.handleSubmit} />
                             </div>
-                        </form>
+                        </div>
+                    </div>
+
+                    <div id="database-stockInfo">
+                        <Table style={tableStyle}>
+                            <thead>
+                                <tr>
+                                    <th> Change </th>
+                                    <th> ClosingPrice </th>
+                                    <th> Code </th>
+                                    <th> Date </th>
+                                    <th> HighestPrice </th>
+                                    <th> LowestPrice </th>
+                                    <th> Name </th>
+                                    <th> OpeningPrice </th>
+                                    <th> TradeValue </th>
+                                    <th> TradeVolume </th>
+                                    <th> Transaction </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {stockInfo}
+                            </tbody>
+                        </Table>
                     </div>
                 </div>
             </React.Fragment >
