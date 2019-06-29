@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Container, Row, Col } from 'reactstrap';
-import { Input, Button } from 'reactstrap';
+import { Input, Button, Badge } from 'reactstrap';
 import axios from 'axios';
 
 class TaiwanStock extends Component {
@@ -8,6 +8,7 @@ class TaiwanStock extends Component {
         allStockData: [],
         allDates: [],
         searchIndex: 0,
+        currentStock: '',
         newStock: '',
         drawIndex: 0
     }
@@ -20,7 +21,7 @@ class TaiwanStock extends Component {
             this.setState({
                 allStockData: stateObj.allStockData,
                 allDates: stateObj.allDates,
-                newStock: currentStock
+                currentStock
             });
         }
 
@@ -43,7 +44,7 @@ class TaiwanStock extends Component {
                     this.setState({
                         allStockData,
                         allDates,
-                        newStock: '台積電-2330'
+                        currentStock: '台積電-2330'
                     })
                 })
                 .catch(error => console.log(error))
@@ -98,6 +99,7 @@ class TaiwanStock extends Component {
             <React.Fragment>
                 <div className="main">
                     <Container>
+                        <h1> <Badge> {this.state.currentStock} </Badge></h1>
                         <Row>
                             <Col>
                                 <Input placeholder="重新查詢" bsSize="lg" value={this.state.newStock} onChange={this.handleInputChange} />
