@@ -7,14 +7,15 @@ class TaiwanStock extends Component {
     state = {
         allStockData: [],
         allDates: [],
-        searchIndex: 0,
+        searchProperty: 'Change',
+        drawProperty: '',
         currentStock: '',
-        newStock: '',
-        drawIndex: 0
+        newStock: ''
     }
 
     componentWillMount = () => {
         const stateObj = JSON.parse(sessionStorage.getItem('stock'));
+
         /* sessionStorage 有存東西 代表是從首頁搜尋之後跳轉過來 */
         if (stateObj) {
             const currentStock = stateObj.allStockData[0].Name + '-' + stateObj.allStockData[0].Code;
@@ -85,13 +86,10 @@ class TaiwanStock extends Component {
             .catch(error => console.log(error))
     }
 
-    handleChangeSearch = e => {
+    handleChangeProperty = e => {
         e.preventDefault();
-
-        const selectBox = document.getElementById('select-box');
-        const selectIndex = selectBox.selectedIndex;
-
-        this.setState({ searchIndex: selectIndex });
+        
+        this.setState({ searchProperty: e.target.value });
     }
 
     render() {
@@ -99,21 +97,18 @@ class TaiwanStock extends Component {
             <React.Fragment>
                 <div className="main">
                     <Container>
-                        <h1> <Badge> {this.state.currentStock} </Badge></h1>
+                        <h1><Badge> {this.state.currentStock} </Badge></h1>
                         <Row>
                             <Col>
                                 <Input placeholder="重新查詢" bsSize="lg" value={this.state.newStock} onChange={this.handleInputChange} />
                                 <Button onClick={this.handleReSearch}> 重新查詢 </Button>
                             </Col>
                         </Row>
-                        <Input type="select" style={{ width: '200px' }} id="select-box" onChange={this.handleChangeSearch} >
+                        <Input type="select" style={{ width: '200px' }} onChange={this.handleChangeProperty} >
                             <option>Change</option>
                             <option>ClosingPrice</option>
-                            <option>Code</option>
-                            <option>Date</option>
                             <option>HighestPrice</option>
                             <option>LowestPrice</option>
-                            <option>Name</option>
                             <option>OpeningPrice</option>
                             <option>TradeValue</option>
                             <option>TradeVolume</option>
