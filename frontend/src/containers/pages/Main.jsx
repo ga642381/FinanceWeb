@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Container, Row, Col } from 'reactstrap';
-import { Input, Button } from 'reactstrap';
+import { Input, Button, Form } from 'reactstrap';
 import axios from 'axios';
 
 import Logo from '../../assets/logo/logo.png';
@@ -53,8 +53,10 @@ class Main extends Component {
                             <Col className="mt-5">
                                 <img src={Logo} style={{ width: "100%" }}></img>
                                 <div>
-                                    <Input id="main_stock_input" placeholder="股票名稱/代碼" bsSize="lg" onChange={this.handleChange} />
-                                    <Button onClick={this.fetchData}> 送出 </Button>
+                                    <Form inline>
+                                        <Input id="main_stock_input" placeholder="股票名稱/代碼" bsSize="lg" onChange={this.handleChange} style={{ width: "85%" }} />
+                                        <Button onClick={this.fetchData} size='lg'> 送出 </Button>
+                                    </Form>
                                 </div>
                             </Col>
                             <Col md="3" />

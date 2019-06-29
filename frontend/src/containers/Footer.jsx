@@ -23,12 +23,11 @@ class Footer extends Component {
                         <div className="col-md-2">
                             <h6>Quick Links</h6>
                             <ul className="footer-links">
-                                <li> <NavLink to="taiwan-stock">台股</NavLink></li>
+                                <li> <NavLink to="taiwan-stock">台灣股市</NavLink></li>
                                 <li><NavLink to="global-market">全球市場</NavLink></li>
                                 <li><NavLink to="crypto-market">加密貨幣</NavLink></li>
-                                <li ><NavLink to="crawler">爬蟲後台</NavLink></li>
                                 <li ><NavLink to="database">資料庫</NavLink></li>
-                                <li ><NavLink to="tutorial">新手上路</NavLink></li>
+                                <li ><NavLink to="crawler">爬蟲後台</NavLink></li>
                             </ul>
                         </div>
 
@@ -37,9 +36,9 @@ class Footer extends Component {
                             <ul className="footer-links">
                                 <li><a href="http://www.twse.com.tw/zh/">台灣證券交易所</a></li>
                                 <li><a href="https://tw.tradingview.com/">TradingView</a></li>
+                                <li>Logo made with <a href="/en/" title="Free Online Logo Maker">DesignEvo</a></li>
                             </ul>
                         </div>
-                        <div>Logo made with <a href="/en/" title="Free Online Logo Maker">DesignEvo</a></div>
                     </div>
                 </div>
             </footer>
