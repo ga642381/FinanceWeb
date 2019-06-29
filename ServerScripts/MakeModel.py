@@ -1,4 +1,4 @@
-from ServerScripts.MongoDB import Mongo_get_TAIEX_data, mongo_url, client
+from MongoDB import Mongo_get_TAIEX_data, mongo_url, client
 import pymongo
 
 import numpy as np, pandas as pd
