@@ -27,6 +27,8 @@ router.get('/', async (req, res) => {
         Sort_by_Date(stock_by_Name)
         return res.send(stock_by_Name)
     }
+
+    res.send('not found');
 })
 
 module.exports = router;

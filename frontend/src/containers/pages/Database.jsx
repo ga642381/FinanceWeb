@@ -21,6 +21,10 @@ class Database extends Component {
             })
 
                 .then(res => {
+                    if (res.data === 'not found') {
+                        return alert('no such stock !!!')
+                    }
+
                     this.setState({ allData: res.data })
                     console.log(this.state.allData)
                 })

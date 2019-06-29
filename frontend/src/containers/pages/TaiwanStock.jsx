@@ -14,12 +14,40 @@ class TaiwanStock extends Component {
 
     componentWillMount = () => {
         const stateObj = JSON.parse(sessionStorage.getItem('stock'));
-        const currentStock = stateObj.allStockData[0].Name + '-'+ stateObj.allStockData[0].Code;
-        this.setState({
-            allStockData: stateObj.allStockData,
-            allDates: stateObj.allDates,
-            newStock: currentStock
-        });
+        /* sessionStorage 有存東西 代表是從首頁搜尋之後跳轉過來 */
+        if (stateObj) {
+            const currentStock = stateObj.allStockData[0].Name + '-' + stateObj.allStockData[0].Code;
+            this.setState({
+                allStockData: stateObj.allStockData,
+                allDates: stateObj.allDates,
+                newStock: currentStock
+            });
+        }
+
+        /* sessionStorage 是空的 代表是直接點擊台灣股市跳轉過來 */
+        else {
+            axios.get('/api/database', {
+                params: {
+                    stock: 2330
+                }
+            })
+                .then(res => {
+                    const allStockData = res.data;
+                    const allDates = res.data.map(e => e.Date);
+                    const stockInfo = {
+                        allStockData,
+                        allDates
+                    }
+
+                    sessionStorage.setItem('stock', JSON.stringify(stockInfo));
+                    this.setState({
+                        allStockData,
+                        allDates,
+                        newStock: '台積電-2330'
+                    })
+                })
+                .catch(error => console.log(error))
+        }
     }
 
     handleInputChange = e => {
@@ -33,7 +61,11 @@ class TaiwanStock extends Component {
             }
         })
             .then(res => {
-                console.log(res)
+                if (res.data === 'not found') {
+                    alert('no such stock !!!');
+                    return window.location.reload();
+                }
+
                 sessionStorage.clear();
                 const allStockData = res.data;
                 const allDates = res.data.map(e => e.Date);
@@ -56,7 +88,7 @@ class TaiwanStock extends Component {
         e.preventDefault();
 
         const selectBox = document.getElementById('select-box');
-        const selectIndex  = selectBox.selectedIndex;
+        const selectIndex = selectBox.selectedIndex;
 
         this.setState({ searchIndex: selectIndex });
     }
@@ -68,7 +100,7 @@ class TaiwanStock extends Component {
                     <Container>
                         <Row>
                             <Col>
-                                <Input placeholder="重新查詢" bsSize="lg"  value={this.state.newStock} onChange={this.handleInputChange}/>
+                                <Input placeholder="重新查詢" bsSize="lg" value={this.state.newStock} onChange={this.handleInputChange} />
                                 <Button onClick={this.handleReSearch}> 重新查詢 </Button>
                             </Col>
                         </Row>
@@ -87,7 +119,7 @@ class TaiwanStock extends Component {
                         </Input>
                     </Container>
                 </div>
-                <Button onClick={()=>console.log(this.state)}> TEST </Button>
+                <Button onClick={() => console.log(this.state)}> TEST </Button>
             </React.Fragment >
         )
     }
