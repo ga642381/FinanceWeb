@@ -2,7 +2,7 @@ import json
 import pymongo
 
 #test
-mongo_url = "mongodb+srv://Finance_python:Finance_python@cluster0-uvsdu.gcp.mongodb.net/test?retryWrites=true&w=majority"
+mongo_url = "mongodb+srv://FinanceWeb:FinanceWeb@cluster0-2i5kf.gcp.mongodb.net/test?retryWrites=true&w=majority"
 client = pymongo.MongoClient(mongo_url)
 
 def df2json(df):
@@ -12,14 +12,6 @@ def df2json(df):
 def Mongo_show_database_names(client):
     print(client.list_database_names())
 
-'''
-def Mongo_get_code_data(client):
-    Code_mongo = client["TaiwanStock"]["stocks"]
-    docs = []
-    for doc in Code_mongo.find():
-        docs.append(doc)
-    return docs
-'''
 
 def Mongo_del_collection(collection):
     collection.drop()

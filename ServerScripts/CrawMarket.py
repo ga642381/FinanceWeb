@@ -10,8 +10,8 @@ import requests
 
 def parse():
     parser = argparse.ArgumentParser(description="crawler type: crawling history data or doing the daily update")
-    parser.add_argument("--daily_update", action="store_true", help="whether doing the daily update")
-    parser.add_argument("--craw_history", action="store_true", help="crawling history data")
+    parser.add_argument("--update", action="store_true", help="whether doing the daily update")
+    parser.add_argument("--history", action="store_true", help="crawling history data")
     
     args = parser.parse_args()
     return args
@@ -32,7 +32,7 @@ class MarketDailyCrawler():
 
         #=== pre work ===#
         self.createLogFile()        
-        self.mongo_url = "mongodb+srv://Finance_python:Finance_python@cluster0-uvsdu.gcp.mongodb.net/test?retryWrites=true&w=majority"
+        self.mongo_url = "mongodb+srv://FinanceWeb:FinanceWeb@cluster0-2i5kf.gcp.mongodb.net/test?retryWrites=true&w=majority"
         self.client = pymongo.MongoClient(self.mongo_url)
         time.sleep(5) 
         
@@ -169,7 +169,7 @@ class MarketDailyCrawler():
                 
                 #=== wait until 5 secs ===#
                 end_time = time.time()
-                while end_time - start_time < 6.5:
+                while end_time - start_time < 5.5:
                     time.sleep(0.5)
                     end_time = time.time()        
        
@@ -248,18 +248,18 @@ class MarketDailyCrawler():
 
 if __name__ == "__main__":
     args = parse() 
-    if args.daily_update:
+    if args.update:
         StockCodeObj = StockCode()    
         MarketDailyCrawler = MarketDailyCrawler(StockCodeObj)    
         
         MarketDailyCrawler.crawToday()
-    elif args.craw_history:
+    elif args.history:
         StockCodeObj = StockCode()    
         MarketDailyCrawler = MarketDailyCrawler(StockCodeObj)          
         
         MarketDailyCrawler.crawHistory()
     else:
-        raise RuntimeError("Please specify what you want to do : --daily_update or --craw_history")
+        raise RuntimeError("Please specify what you want to do : --update or --history")
     
         
         

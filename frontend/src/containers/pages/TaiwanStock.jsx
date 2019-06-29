@@ -1,16 +1,85 @@
 import React, { Component } from "react";
 import { Container, Row, Col } from 'reactstrap';
 import { Input, Button, Badge } from 'reactstrap';
+
+import Highcharts, { chart } from 'highcharts'
+import HighchartsReact from 'highcharts-react-official'
+
 import axios from 'axios';
+
+// like 108/06/27
+// like 99/01/22
+function WantedDate(ROCdate) {
+    const ROCdateArr = ROCdate.split("/");
+    const year = Number(ROCdateArr[0]) + 1911
+    const month = ROCdateArr[1] - 1
+    const day = ROCdateArr[2]
+    return [year, month, day]
+}
+
+
+
+function getHighChartOptions(StockData, stockName, drawProperty) {
+    const data = StockData.map(e => {
+        const [year, month, day] = WantedDate(e["Date"]);
+        return [Date.UTC(year, month, day), e[drawProperty]]
+    })
+
+
+    const options = {
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: { // don't display the dummy year
+                month: '%e. %b',
+                year: '%b'
+            }
+        },
+
+        yAxis: {
+            title: {
+                text: drawProperty
+            }
+        },
+
+        legend: {
+            enabled: false
+        },
+
+        title: {
+            text: stockName
+        },
+
+        series: [{
+            data: data
+        }],
+
+        chart: {
+            height: "600px"
+        }
+    }
+    return options
+}
+
+
+
 
 class TaiwanStock extends Component {
     state = {
         allStockData: [],
         allDates: [],
-        searchProperty: 'Change',
-        drawProperty: '',
+        drawProperty: 'ClosingPrice',
         currentStock: '',
-        newStock: ''
+        newStock: '',
+
+        HighChartOptions: ''
+    }
+
+
+    DRAW = () => {
+        const HighChartOptions = getHighChartOptions(this.state.allStockData, this.state.currentStock, this.state.drawProperty)
+        this.setState({
+            HighChartOptions: HighChartOptions,
+        });
     }
 
     componentWillMount = () => {
@@ -18,12 +87,13 @@ class TaiwanStock extends Component {
 
         /* sessionStorage 有存東西 代表是從首頁搜尋之後跳轉過來 */
         if (stateObj) {
+            const allStockData = stateObj.allStockData;
             const currentStock = stateObj.allStockData[0].Name + '-' + stateObj.allStockData[0].Code;
+            console.log(allStockData);
             this.setState({
-                allStockData: stateObj.allStockData,
-                allDates: stateObj.allDates,
-                currentStock
-            });
+                allStockData: allStockData,
+                currentStock: currentStock,
+            }, () => this.DRAW())
         }
 
         /* sessionStorage 是空的 代表是直接點擊台灣股市跳轉過來 */
@@ -40,7 +110,6 @@ class TaiwanStock extends Component {
                         allStockData,
                         allDates
                     }
-
                     sessionStorage.setItem('stock', JSON.stringify(stockInfo));
                     this.setState({
                         allStockData,
@@ -50,6 +119,8 @@ class TaiwanStock extends Component {
                 })
                 .catch(error => console.log(error))
         }
+
+
     }
 
     handleInputChange = e => {
@@ -88,8 +159,7 @@ class TaiwanStock extends Component {
 
     handleChangeProperty = e => {
         e.preventDefault();
-        
-        this.setState({ searchProperty: e.target.value });
+        this.setState({ drawProperty: e.target.value }, () => this.DRAW());
     }
 
     render() {
@@ -98,32 +168,37 @@ class TaiwanStock extends Component {
                 <div className="main">
                     <Container>
                         <Row>
-                            <Col>
-                                <h1><Badge>{this.state.currentStock}</Badge></h1> 
-                            </Col>
-                            <Col>
-                                <div className="form-inline">                       
+                            <Col md="5">
+                                <div className="form-inline">
                                     <Input placeholder="輸入股票名稱/代碼" bsSize="lg" value={this.state.newStock} onChange={this.handleInputChange} />
                                     <Button onClick={this.handleReSearch} size='lg'> 查詢 </Button>
-                                </div>                            
+                                </div>
                             </Col>
+
                             <Col>
+                                <Input bsSize="lg" type="select" style={{ width: '200px' }} onChange={this.handleChangeProperty} >
+                                    <option>ClosingPrice</option>
+                                    <option>HighestPrice</option>
+                                    <option>LowestPrice</option>
+                                    <option>OpeningPrice</option>
+                                    <option>TradeValue</option>
+                                    <option>TradeVolume</option>
+                                    <option>Transaction</option>
+                                </Input>
+                            </Col>
+
+                            <Col>
+                                <h1><Badge color="primary">{this.state.currentStock}</Badge></h1>
                             </Col>
                         </Row>
-
-                        <Input type="select" style={{ width: '200px' }} onChange={this.handleChangeProperty} >
-                            <option>Change</option>
-                            <option>ClosingPrice</option>
-                            <option>HighestPrice</option>
-                            <option>LowestPrice</option>
-                            <option>OpeningPrice</option>
-                            <option>TradeValue</option>
-                            <option>TradeVolume</option>
-                            <option>Transcation</option>
-                        </Input>
                     </Container>
+
+                    <div style={{ width: "100%", marginTop: "50px", overflow: "hidden" }}>
+
+                        <HighchartsReact highcharts={Highcharts} options={this.state.HighChartOptions} />
+                    </div>
                 </div>
-                <Button onClick={() => console.log(this.state)}> TEST </Button>
+                {/* <Button onClick={() => console.log(this.state)}> TEST </Button> */}
             </React.Fragment >
         )
     }
