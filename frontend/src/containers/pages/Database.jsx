@@ -61,7 +61,7 @@ class Database extends Component {
                 <div id="database" className="main">
                     <div id="querier">
                         <label><b>股票代號</b></label><br />
-                        <input type="text" name="stock" placeholder="輸入股票代碼 or 公司名稱" value={this.state.stock} onChange={this.handleChange} /><br />
+                        <input type="text" name="stock" placeholder="輸入股票名稱/代碼" value={this.state.stock} onChange={this.handleChange} /><br />
                         <input type="submit" value="送出" onClick={this.handleSubmit} />
                     </div>
 

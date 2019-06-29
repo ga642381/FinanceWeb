@@ -22,6 +22,7 @@ class Main extends Component {
     }
 
     fetchData = () => {
+        console.log("hey")
         axios.get('/api/database', {
             params: {
                 stock: this.state.stock
@@ -52,11 +53,9 @@ class Main extends Component {
                             <Col md="3" />
                             <Col className="mt-5">
                                 <img src={Logo} style={{ width: "100%" }}></img>
-                                <div>
-                                    <Form inline>
-                                        <Input id="main_stock_input" placeholder="股票名稱/代碼" bsSize="lg" onChange={this.handleChange} style={{ width: "85%" }} />
-                                        <Button onClick={this.fetchData} size='lg'> 送出 </Button>
-                                    </Form>
+                                <div className="form-inline">
+                                    <Input id="main_stock_input" placeholder="輸入股票名稱/代碼, 查看公司股價" bsSize="lg" onChange={this.handleChange} style={{ width: "85%" }} />
+                                    <Button onClick={this.fetchData} size='lg'> 查詢 </Button>
                                 </div>
                             </Col>
                             <Col md="3" />

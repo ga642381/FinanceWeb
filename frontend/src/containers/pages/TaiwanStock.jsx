@@ -97,13 +97,20 @@ class TaiwanStock extends Component {
             <React.Fragment>
                 <div className="main">
                     <Container>
-                        <h1><Badge> {this.state.currentStock} </Badge></h1>
                         <Row>
                             <Col>
-                                <Input placeholder="重新查詢" bsSize="lg" value={this.state.newStock} onChange={this.handleInputChange} />
-                                <Button onClick={this.handleReSearch}> 重新查詢 </Button>
+                                <h1><Badge>{this.state.currentStock}</Badge></h1> 
+                            </Col>
+                            <Col>
+                                <div className="form-inline">                       
+                                    <Input placeholder="輸入股票名稱/代碼" bsSize="lg" value={this.state.newStock} onChange={this.handleInputChange} />
+                                    <Button onClick={this.handleReSearch} size='lg'> 查詢 </Button>
+                                </div>                            
+                            </Col>
+                            <Col>
                             </Col>
                         </Row>
+
                         <Input type="select" style={{ width: '200px' }} onChange={this.handleChangeProperty} >
                             <option>Change</option>
                             <option>ClosingPrice</option>
