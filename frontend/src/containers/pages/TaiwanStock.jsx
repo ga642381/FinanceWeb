@@ -71,7 +71,7 @@ class TaiwanStock extends Component {
         currentStock: '',
         newStock: '',
 
-        HighChartOptions: ''
+        HighChartOptions: '',
     }
 
 
@@ -105,22 +105,17 @@ class TaiwanStock extends Component {
             })
                 .then(res => {
                     const allStockData = res.data;
-                    const allDates = res.data.map(e => e.Date);
                     const stockInfo = {
                         allStockData,
-                        allDates
                     }
                     sessionStorage.setItem('stock', JSON.stringify(stockInfo));
                     this.setState({
                         allStockData,
-                        allDates,
                         currentStock: '台積電-2330'
-                    })
+                    }, () => this.DRAW())
                 })
                 .catch(error => console.log(error))
         }
-
-
     }
 
     handleInputChange = e => {

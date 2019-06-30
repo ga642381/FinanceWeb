@@ -3,3 +3,7 @@ node_modules/
 __pycache__/
 
 backend/config/keys.js
+
+crawled.log
+
+crawled_website.log

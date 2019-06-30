@@ -90,12 +90,14 @@ const crawledlogRouter = require('./routes/api/crawledlog');
 const authRouter = require('./routes/auth/auth');
 const userdataRouter = require('./routes/api/userdata');
 const databaseRouter = require('./routes/api/database');
+const TAIEXPredictionRouter = require('./routes/api/TAIEXprediction')
 
 //attached to our app
 app.use('/api/database', databaseRouter);
 app.use('/api/crawledlog', crawledlogRouter);
 app.use('/api/metas', metasRouter);
 app.use('/api/userdata', userdataRouter);
+app.use('/api/TAIEXprediction', TAIEXPredictionRouter)
 app.use('/auth', authRouter);
 
 

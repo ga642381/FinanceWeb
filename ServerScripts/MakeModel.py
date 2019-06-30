@@ -49,6 +49,6 @@ pred_Y = model.predict(
 result = {'predict': pred_Y[0][0], 'change': pred_Y[0][0] - train_Y[-1]}
 for i in result: result[i] = float(result[i])
 
-from ServerScripts.MongoDB import client, mongo_url
-from ServerScripts.MongoDB import Mongo_update_collec
+from MongoDB import client, mongo_url
+from MongoDB import Mongo_update_collec
 Mongo_update_collec(collection=client["TaiwanStock"]['TAIEX_predicts'], input_data=[result])

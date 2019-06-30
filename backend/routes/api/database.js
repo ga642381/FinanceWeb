@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const StockDaily = require('../../models/StockDaily')
+const TAIEXDaily = require('../../models/TAIEXDaily')
 
 /* helper functions */
 function Sort_by_Date(allData) {
-    allData.sort(function(a,b) {
+    allData.sort(function (a, b) {
         a = a.Date.split('/').join('');
         b = b.Date.split('/').join('');
         return a > b ? 1 : a < b ? -1 : 0;
@@ -14,6 +15,13 @@ function Sort_by_Date(allData) {
 
 router.get('/', async (req, res) => {
     const stock = req.query.stock;
+
+    if (stock == "TAIEX") {
+        const TAIEX_data = await TAIEXDaily.find();
+        Sort_by_Date(TAIEX_data);
+        return res.send(TAIEX_data);
+    }
+
 
     const stock_by_Code = await StockDaily.find({ Code: stock });
     if (stock_by_Code.length !== 0) {

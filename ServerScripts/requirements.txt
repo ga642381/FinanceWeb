@@ -1,2 +1,5 @@
 pymongo
 dnspython
+keras
+tensorflow
+pandas==0.24
