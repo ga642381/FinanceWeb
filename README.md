@@ -1,5 +1,9 @@
 # [107-2] Web Programming Final
 ### [Group 41] FinanceWeb
+<img src="https://i.imgur.com/IQPn9zF.png" width="50%">
+
+## Demo 影片連結
+https://www.youtube.com/watch?v=FifaEceno74
 
 ## Github Repo
   https://github.com/ga642381/FinanceWeb
