@@ -47,6 +47,6 @@
   },
   "proxy": "http://localhost:5000/",
   "devDependencies": {
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^3.1.1"
   }
 }
